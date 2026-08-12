@@ -568,7 +568,7 @@ A estratégia de qualidade é o que orienta a arquitetura.
 
 # Sobre mim
 
-Sou **Vanessa Lima**, profissional em desenvolvimento na área de Quality Engineering, com foco em automação de testes e construção de frameworks.
+Sou **Vanessa Santos**, profissional em desenvolvimento na área de Quality Engineering, com foco em automação de testes e construção de frameworks.
 
 Tenho direcionado meus estudos e projetos para automação Web, integração de serviços, validações em banco de dados e arquitetura de testes utilizando Java.
 
@@ -579,13 +579,13 @@ Este projeto representa minha evolução prática na construção de uma soluç�
 # Contato
 
 **LinkedIn**
-https://www.linkedin.com/in/vanessa-ads/
+https://www.linkedin.com/in/vanessasantos-qa/
 
 **GitHub**
-https://github.com/vanessalimaQA
+https://github.com/vanessaSantosQA
 
 ---
 
 > **Qualidade não termina quando o teste passa. Ela começa quando conseguimos confiar no comportamento que estamos validando.**
 
-**Vanessa Lima — QA Automation | Quality Engineering**
+**Vanessa Santos — QA Automation | Quality Engineering**
