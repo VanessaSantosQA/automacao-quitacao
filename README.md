@@ -1,10 +1,10 @@
 # Financial Validation & Test Automation Framework
 
-### Java 21 • Playwright • JUnit 5 • SOAP • SQL Server
+### Java 21 • Playwright • JUnit 5 • SOAP/HTTP • SQL Server
 
 > Framework de automação orientado à validação de fluxos financeiros, integração entre camadas e regras de negócio.
 
-Desenvolvido com foco em **qualidade de engenharia, rastreabilidade das validações, baixo acoplamento e evolução sustentável da automação**.
+Desenvolvido com foco em **Quality Engineering, rastreabilidade das validações, baixo acoplamento e evolução sustentável da automação**.
 
 ---
 
@@ -54,10 +54,10 @@ Pages          Services
 Playwright      SOAP / HTTP
                   │
                   ▼
-             Repositories
+              Repositories
                   │
                   ▼
-              SQL Server
+               SQL Server
 
 Domain
   ├── Models
@@ -170,7 +170,7 @@ Novo estado
 
 O validator compara os estados considerando a regra de negócio correspondente.
 
-Essa abordagem reduz dependência de asserts isolados e facilita investigações de regressões.
+Essa abordagem reduz a dependência de asserts isolados e facilita a investigação de regressões.
 
 ---
 
@@ -200,16 +200,16 @@ Uma operação pode ser validada em diferentes pontos do sistema.
 
 ```text
                OPERAÇÃO
-                   │
-        ┌──────────┼──────────┐
-        ▼          ▼          ▼
-       WEB        SOAP        DB
-        │          │          │
-        └──────────┼──────────┘
-                   ▼
-             REGRA DE DOMÍNIO
-                   │
-                   ▼
+                  │
+        ┌─────────┼─────────┐
+        ▼         ▼         ▼
+       WEB       SOAP       DB
+        │         │         │
+        └─────────┼─────────┘
+                  ▼
+           REGRA DE DOMÍNIO
+                  │
+                  ▼
               RESULTADO
 ```
 
@@ -245,7 +245,7 @@ Essa organização reduz duplicação e mantém mudanças de interface isoladas 
 
 A camada de integração foi preparada para trabalhar com serviços SOAP através do Apache HttpClient.
 
-Responsabilidades são separadas entre:
+As responsabilidades são separadas entre:
 
 ```text
 Request
@@ -307,7 +307,7 @@ Recursos locais podem ser resolvidos pelo classpath:
 classpath:quitacao.html
 ```
 
-evitando caminhos absolutos como:
+Evitando caminhos absolutos como:
 
 ```text
 C:\Users\usuario\projeto\...
@@ -332,7 +332,7 @@ Cada desenvolvedor cria sua configuração local a partir desses modelos.
 
 Arquivos contendo informações locais são protegidos pelo `.gitignore`.
 
-Essa estratégia evita exposição acidental de credenciais no histórico do Git.
+Essa estratégia reduz o risco de exposição acidental de credenciais no histórico do Git.
 
 ---
 
@@ -396,7 +396,7 @@ antes que um erro de configuração chegue à camada Web.
 | Test Data             | Datafaker           |
 | Versionamento         | Git / GitHub        |
 
-O `pom.xml` centraliza as versões das principais dependências para facilitar manutenção e atualização do framework.
+O `pom.xml` centraliza as versões das principais dependências para facilitar a manutenção e atualização do framework.
 
 ---
 
@@ -483,13 +483,13 @@ Git
 Clone o repositório:
 
 ```bash
-git clone https://github.com/vanessalimaQA/automacao-quitacao.git
+git clone https://github.com/VanessaSantosQA/automacao-quitacao.git
 cd automacao-quitacao
 ```
 
 Crie os arquivos locais de configuração a partir dos exemplos.
 
-PowerShell:
+### PowerShell
 
 ```powershell
 Copy-Item "src/main/resources/application.properties.example" "src/main/resources/application.properties"
@@ -497,7 +497,7 @@ Copy-Item "src/main/resources/application.properties.example" "src/main/resource
 Copy-Item "src/main/resources/users.properties.example" "src/main/resources/users.properties"
 ```
 
-Execute:
+Execute a suíte:
 
 ```bash
 mvn clean test
@@ -531,15 +531,15 @@ Entre os próximos passos estão:
 
 ```text
 CI/CD
-        ↓
+   ↓
 GitHub Actions
-        ↓
+   ↓
 Execução automatizada
-        ↓
+   ↓
 Relatórios
-        ↓
+   ↓
 Evidências
-        ↓
+   ↓
 Regressão financeira
 ```
 
@@ -556,7 +556,7 @@ Também fazem parte da evolução planejada:
 
 # O que este projeto demonstra
 
-Mais do que conhecimento de uma ferramenta de automação, este projeto demonstra uma abordagem de Quality Engineering baseada em:
+Mais do que conhecimento de uma ferramenta de automação, este projeto demonstra uma abordagem de **Quality Engineering** baseada em:
 
 **entender o domínio → modelar o problema → separar responsabilidades → automatizar → observar o estado → validar o comportamento.**
 
@@ -578,11 +578,11 @@ Este projeto representa minha evolução prática na construção de uma soluç�
 
 # Contato
 
-**LinkedIn**
+**LinkedIn:**
 https://www.linkedin.com/in/vanessasantos-qa/
 
-**GitHub**
-https://github.com/vanessaSantosQA
+**GitHub:**
+https://github.com/VanessaSantosQA
 
 ---
 
