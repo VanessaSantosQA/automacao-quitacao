@@ -15,7 +15,7 @@ public final class ConfigReader {
     }
 
     private ConfigReader() {
-        // Impede instanciaÃ§Ã£o.
+        // Impede instanciação.
     }
 
     private static void carregarConfiguracoes() {
@@ -26,17 +26,15 @@ public final class ConfigReader {
                 .getClassLoader()
                 .getResourceAsStream(nomeArquivo)) {
 
-            if (input == null) {
-                throw new IllegalStateException(
-                        "Arquivo de configuraÃ§Ã£o nÃ£o encontrado: " + nomeArquivo
-                );
+            // O arquivo de configuração é opcional.
+            // Caso exista, suas propriedades serão carregadas.
+            if (input != null) {
+                PROPERTIES.load(input);
             }
-
-            PROPERTIES.load(input);
 
         } catch (IOException e) {
             throw new IllegalStateException(
-                    "Erro ao carregar o arquivo de configuraÃ§Ã£o: " + nomeArquivo,
+                    "Erro ao carregar o arquivo de configuração: " + nomeArquivo,
                     e
             );
         }
@@ -47,7 +45,7 @@ public final class ConfigReader {
 
         if (valor == null || valor.isBlank()) {
             throw new IllegalStateException(
-                    "ConfiguraÃ§Ã£o obrigatÃ³ria nÃ£o encontrada: " + chave
+                    "Configuração obrigatória não encontrada: " + chave
             );
         }
 
@@ -66,14 +64,18 @@ public final class ConfigReader {
 
     private static String buscarValor(String chave) {
 
-        // 1. Propriedade passada pela JVM: -Dchave=valor
+        // 1. Propriedade passada pela JVM:
+        // Exemplo: -Ddb.url=...
         String valorJVM = System.getProperty(chave);
 
         if (valorJVM != null && !valorJVM.isBlank()) {
             return valorJVM;
         }
 
-        // 2. VariÃ¡vel de ambiente: VIEWPORT_WIDTH, DB_PASSWORD etc.
+        // 2. Variável de ambiente:
+        // db.url -> DB_URL
+        // db.user -> DB_USER
+        // db.password -> DB_PASSWORD
         String nomeVariavelAmbiente = converterParaVariavelAmbiente(chave);
         String valorAmbiente = System.getenv(nomeVariavelAmbiente);
 
@@ -81,7 +83,7 @@ public final class ConfigReader {
             return valorAmbiente;
         }
 
-        // 3. Arquivo config-<ambiente>.properties
+        // 3. Arquivo config-<ambiente>.properties, caso exista.
         return PROPERTIES.getProperty(chave);
     }
 
