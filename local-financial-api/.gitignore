@@ -1,0 +1,23 @@
+# Maven
+target/
+
+# Allure local
+allure-results/
+allure-report/
+.allure/
+
+# Logs
+*.log
+spring-error.log
+spring.log
+
+# IntelliJ
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db

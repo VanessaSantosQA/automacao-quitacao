@@ -1,0 +1,70 @@
+name: API Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Compilar projeto
+        working-directory: local-financial-api
+        run: mvn clean compile
+
+      - name: Iniciar API
+        working-directory: local-financial-api
+        run: |
+          nohup mvn spring-boot:run > spring.log 2>&1 &
+
+      - name: Aguardar API
+        working-directory: local-financial-api
+        run: |
+          for i in {1..30}; do
+            if curl --fail http://localhost:8081/api/health; then
+              echo "API pronta"
+              exit 0
+            fi
+
+            echo "Aguardando API..."
+            sleep 2
+          done
+
+          echo "API nao iniciou"
+          cat spring.log
+          exit 1
+
+      - name: Executar testes REST
+        working-directory: local-financial-api
+        run: mvn test -Dtest=PagamentoApiTest -Denvironment=local
+
+      - name: Salvar resultados Allure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: /allure-results
+          if-no-files-found: warn
+
+      - name: Salvar log da API
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: spring-api-log
+          path: /spring.log
+          if-no-files-found: warn
