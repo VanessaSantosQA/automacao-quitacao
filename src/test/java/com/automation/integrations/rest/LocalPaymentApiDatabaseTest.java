@@ -1,5 +1,7 @@
 package com.automation.integrations.rest;
 
+import com.automation.integrations.rest.config.ApiConfig;
+
 import com.automation.database.DatabaseConnection;
 import com.automation.database.PaymentRecord;
 import com.automation.repository.LocalPaymentRepository;
@@ -29,7 +31,7 @@ class LocalPaymentApiDatabaseTest {
 
         Response response =
                 given()
-                        .baseUri("http://localhost:8081")
+                        .baseUri(ApiConfig.localBaseUrl())
                         .contentType("application/json")
                         .body(body)
 

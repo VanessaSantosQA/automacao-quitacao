@@ -1,5 +1,7 @@
 package com.automation.integrations.rest;
 
+import com.automation.integrations.rest.config.ApiConfig;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 
@@ -19,7 +21,7 @@ class LocalQuitacaoSimulationApiTest {
                 """;
 
         given()
-                .baseUri("http://localhost:8081")
+                .baseUri(ApiConfig.localBaseUrl())
                 .contentType("application/json")
                 .body(body)
 

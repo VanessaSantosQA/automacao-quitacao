@@ -1,5 +1,7 @@
 package com.automation.integrations.rest;
 
+import com.automation.integrations.rest.config.ApiConfig;
+
 import com.automation.database.BoletoQuitacaoRecord;
 import com.automation.database.DatabaseConnection;
 import com.automation.repository.LocalBoletoQuitacaoRepository;
@@ -23,7 +25,7 @@ class LocalQuitacaoBoletoApiDatabaseTest {
 
         Response simulacao =
                 given()
-                        .baseUri("http://localhost:8081")
+                        .baseUri(ApiConfig.localBaseUrl())
                         .contentType("application/json")
                         .body("""
                                 {
@@ -49,7 +51,7 @@ class LocalQuitacaoBoletoApiDatabaseTest {
 
         Response boletoResponse =
                 given()
-                        .baseUri("http://localhost:8081")
+                        .baseUri(ApiConfig.localBaseUrl())
                         .contentType("application/json")
                         .body("""
                                 {

@@ -1,5 +1,7 @@
 package com.automation.integrations.rest;
 
+import com.automation.integrations.rest.config.ApiConfig;
+
 import com.automation.business.PaymentAmountCalculator;
 import com.automation.database.DatabaseConnection;
 import com.automation.database.PaymentRecord;
@@ -37,7 +39,7 @@ class LocalPaymentScenariosApiTest {
 
         Response simulacao =
                 given()
-                        .baseUri("http://localhost:8081")
+                        .baseUri(ApiConfig.localBaseUrl())
                         .contentType("application/json")
                         .body("""
                                 {
@@ -85,7 +87,7 @@ class LocalPaymentScenariosApiTest {
 
         Response pagamentoResponse =
                 given()
-                        .baseUri("http://localhost:8081")
+                        .baseUri(ApiConfig.localBaseUrl())
                         .contentType("application/json")
                         .body(bodyPagamento)
                 .when()
