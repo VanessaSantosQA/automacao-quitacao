@@ -12,7 +12,7 @@
     <version>1.0.0</version>
 
     <name>Automation Framework</name>
-    <description>Framework de AutomaÃ§Ã£o Web, API, SOAP e Banco de Dados</description>
+    <description>Framework de AutomaÃƒÂ§ÃƒÂ£o Web, API, SOAP e Banco de Dados</description>
 
     <properties>
 
@@ -45,7 +45,7 @@
         <assertj.version>3.27.4</assertj.version>
 
         <!-- LOG -->
-        <slf4j.version>2.0.18</slf4j.version>
+        <slf4j.version>1.7.36</slf4j.version>
 
         <!-- EXCEL -->
         <poi.version>5.4.0</poi.version>
@@ -215,7 +215,7 @@
 
             </plugin>
 
-            <!-- EXECUÃ‡ÃƒO DOS TESTES -->
+            <!-- EXECUÃƒâ€¡ÃƒÆ’O DOS TESTES -->
 
             <plugin>
 
@@ -230,7 +230,7 @@
 
                     <!--
                         Testes marcados com @Tag("external")
-                        nÃ£o executam na suÃ­te principal.
+                        nÃƒÂ£o executam na suÃƒÂ­te principal.
                     -->
                     <excludedGroups>external,integration</excludedGroups>
 

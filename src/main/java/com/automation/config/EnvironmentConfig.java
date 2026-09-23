@@ -1,23 +1,33 @@
 package com.automation.config;
 
-import com.automation.utils.ConfigReader;
+public final class EnvironmentConfig {
 
-public class EnvironmentConfig {
+    private EnvironmentConfig() {
+    }
 
     public static String getEnvironment() {
 
-        return ConfigReader.get("environment");
+        String environment = System.getProperty("env");
 
+        if (environment == null || environment.isBlank()) {
+            environment = System.getenv("ENV");
+        }
+
+        if (environment == null || environment.isBlank()) {
+            environment = ConfigReader.get("environment");
+        }
+
+        return environment.trim().toLowerCase();
     }
 
     public static String getBaseUrl() {
 
         String environment = getEnvironment();
 
-        return ConfigReader.get(
-                "base.url." + environment
-        );
-
+        try {
+            return ConfigReader.get("base.url." + environment);
+        } catch (IllegalStateException e) {
+            return ConfigReader.get("base.url");
+        }
     }
-
 }
