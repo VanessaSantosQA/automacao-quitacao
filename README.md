@@ -1,591 +1,138 @@
-# Financial Validation & Test Automation Framework
 
-### Java 21 • Playwright • JUnit 5 • SOAP/HTTP • SQL Server
+<div align="center">
 
-> Framework de automação orientado à validação de fluxos financeiros, integração entre camadas e regras de negócio.
+# 🧪 QA Automation | Financial Testing
 
-Desenvolvido com foco em **Quality Engineering, rastreabilidade das validações, baixo acoplamento e evolução sustentável da automação**.
+### Automação de Testes e Validação de Sistemas Financeiros
 
----
+**Java • Playwright • JUnit 5 • API Testing • SQL Server**
 
-## Visão Geral
+![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Playwright](https://img.shields.io/badge/Playwright-Automation-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)
+![JUnit](https://img.shields.io/badge/JUnit-5-25A162?style=for-the-badge&logo=junit5&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-Build-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
+![SQL Server](https://img.shields.io/badge/SQL_Server-Database-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
 
-Este projeto nasceu com um objetivo que vai além da automação de interface:
+**Desenvolvido por Vanessa Santos | Quality Assurance**
 
-**validar o comportamento financeiro de uma operação através de diferentes camadas do sistema.**
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Vanessa_Santos-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vanessasantos-qa/)
+[![GitHub](https://img.shields.io/badge/GitHub-VanessaSantosQA-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/VanessaSantosQA)
 
-A estratégia combina automação Web, serviços, banco de dados e regras de domínio para permitir que uma mesma operação seja analisada desde sua preparação até o estado final persistido.
-
-```text
-Massa de teste
-      ↓
-Estado financeiro inicial
-      ↓
-Execução da operação
-      ↓
-Web / SOAP
-      ↓
-Processamento
-      ↓
-Estado financeiro final
-      ↓
-Validação das regras de negócio
-```
-
-A arquitetura foi estruturada para evitar que regras financeiras fiquem acopladas diretamente aos testes ou à tecnologia utilizada para executá-los.
+</div>
 
 ---
 
-# Arquitetura
+## 📌 Sobre o projeto
 
-O framework utiliza separação explícita de responsabilidades.
+Projeto de **Quality Assurance e Automação de Testes** desenvolvido para validar operações financeiras, com foco em qualidade de software, confiabilidade dos dados e regras de negócio.
 
-```text
-Tests
-  │
-  ▼
-Flows
-  │
-  ├───────────────┐
-  ▼               ▼
-Pages          Services
-  │               │
-  ▼               ▼
-Playwright      SOAP / HTTP
-                  │
-                  ▼
-              Repositories
-                  │
-                  ▼
-               SQL Server
+A solução contempla testes de interface Web, integração com serviços SOAP/HTTP e validações em banco de dados SQL Server.
 
-Domain
-  ├── Models
-  ├── Calculators
-  ├── Validators
-  └── Snapshots
-```
-
-Cada camada possui uma responsabilidade definida.
-
-### Tests
-
-Representam os cenários e resultados esperados.
-
-O objetivo é manter os testes legíveis e livres de detalhes técnicos desnecessários.
-
-### Flows
-
-Orquestram jornadas que envolvem múltiplas ações.
-
-Essa camada evita transformar os testes em sequências extensas de chamadas de Page Objects, serviços ou banco de dados.
-
-### Pages
-
-Encapsulam interação e comportamento da interface Web utilizando Playwright.
-
-Os seletores são mantidos separados da lógica de navegação e das regras de negócio.
-
-### Services
-
-Responsáveis pela comunicação com serviços externos e operações SOAP/HTTP.
-
-### Repositories
-
-Centralizam o acesso aos dados persistidos.
-
-Queries SQL não ficam espalhadas pelas classes de teste.
-
-### Domain
-
-Concentra regras e conceitos financeiros independentes da infraestrutura.
-
-É nessa camada que ficam modelos, cálculos, validações e representações de estado financeiro.
+> 🎯 **Objetivo:** garantir que as operações financeiras sejam processadas corretamente, validando os resultados na aplicação, nos serviços e no banco de dados.
 
 ---
 
-# Estratégia de Validação Financeira
+## 🚀 O que desenvolvi
 
-Uma das principais decisões do projeto é separar:
-
-**execução da operação**
-
-de
-
-**validação do resultado financeiro.**
-
-Um cenário pode seguir, por exemplo:
-
-```text
-1. Localizar uma massa elegível
-          ↓
-2. Consultar estado financeiro inicial
-          ↓
-3. Registrar um snapshot
-          ↓
-4. Executar a operação
-          ↓
-5. Aguardar/processar alteração
-          ↓
-6. Consultar estado financeiro posterior
-          ↓
-7. Aplicar regras de validação
-```
-
-Isso permite validar efeitos que não necessariamente aparecem imediatamente na interface.
+| Área | Implementação |
+|---|---|
+| 🌐 Testes Web | Automação de funcionalidades com Java e Playwright |
+| 🧪 Testes funcionais | Validação de cenários e regras de negócio |
+| 🔗 Testes de API | Integração e validação de serviços SOAP/HTTP |
+| 🗄️ Banco de dados | Consultas e validações SQL Server com JDBC |
+| 💰 Regras financeiras | Pagamentos, cálculos, quitação e boletos |
+| 🏗️ Arquitetura | Page Object Model e organização em camadas |
+| 📋 Qualidade | Verificações, resultados e evidências de testes |
 
 ---
 
-# Financial Snapshot Strategy
+## 🛠️ Stack tecnológica
 
-Operações financeiras frequentemente alteram múltiplos registros e podem depender de processamentos posteriores.
+### Automação e desenvolvimento
 
-Por esse motivo, o framework trabalha com o conceito de **snapshot financeiro**.
+- **Linguagem:** Java 21
+- **Automação Web:** Playwright
+- **Framework de testes:** JUnit 5
+- **Gerenciamento de dependências:** Maven
+- **Padrão de projeto:** Page Object Model
 
-```text
-BEFORE
-────────────────────────
+### APIs e dados
 
-Conta
-Saldo
-Fatura
-Pagamento
-Parcelamento
-Estado relevante
+- **Integração:** SOAP/HTTP
+- **Banco de dados:** SQL Server
+- **Conectividade:** JDBC
+- **Versionamento:** Git e GitHub
 
+### Estratégias de testes
 
-        OPERAÇÃO
-
-
-AFTER
-────────────────────────
-
-Conta
-Saldo
-Fatura
-Pagamento
-Parcelamento
-Novo estado
-```
-
-O validator compara os estados considerando a regra de negócio correspondente.
-
-Essa abordagem reduz a dependência de asserts isolados e facilita a investigação de regressões.
+`Testes Funcionais` `Regressão` `Integração` `E2E` `Validação de Regras de Negócio`
 
 ---
 
-# Cenários Financeiros
+## 🔄 Fluxo de validação financeira
 
-A estrutura suporta cenários como:
+```mermaid
+flowchart TD
+    A["Preparar massa de teste"] --> B["Consultar estado inicial no banco"]
+    B --> C["Executar operação financeira"]
+    C --> D["Validar resposta da aplicação/API"]
+    D --> E["Consultar registros no SQL Server"]
+    E --> F{"Resultados corretos?"}
+    F -->|Sim| G["Registrar sucesso e evidências"]
+    F -->|Não| H["Investigar falha e registrar defeito"]
+```
 
-* pagamento integral;
-* pagamento do valor mínimo;
-* pagamento inferior ao mínimo;
-* pagamento intermediário entre mínimo e saldo;
-* pagamento superior ao saldo;
-* quitação;
-* geração e validação de boleto;
-* alterações relacionadas a parcelamento;
-* validações posteriores ao processamento.
-
-Os valores dos cenários podem ser calculados dinamicamente a partir do contexto financeiro da conta.
-
-Isso evita massas rígidas e valores arbitrários dentro dos testes.
+Esse fluxo representa a abordagem de validação de ponta a ponta utilizada no projeto, desde a preparação dos dados até a análise dos resultados financeiros.
 
 ---
 
-# Validação em Múltiplas Camadas
+## 💰 Cenários financeiros
 
-Uma operação pode ser validada em diferentes pontos do sistema.
+O projeto aborda validações relacionadas a:
 
-```text
-               OPERAÇÃO
-                  │
-        ┌─────────┼─────────┐
-        ▼         ▼         ▼
-       WEB       SOAP       DB
-        │         │         │
-        └─────────┼─────────┘
-                  ▼
-           REGRA DE DOMÍNIO
-                  │
-                  ▼
-              RESULTADO
-```
-
-O objetivo não é apenas confirmar que uma tela exibiu sucesso.
-
-O framework busca validar que **o estado produzido pelo sistema corresponde ao comportamento financeiro esperado**.
+- Pagamento mínimo, parcial e integral.
+- Simulação de quitação.
+- Geração e validação de boletos.
+- Consultas de informações financeiras no banco.
+- Comparação de dados antes e depois das operações.
+- Validação de regras e cálculos financeiros.
 
 ---
 
-# Web Automation
+## 📂 Estrutura e documentação
 
-A camada Web utiliza **Playwright para Java**.
-
-A estrutura separa:
-
-```text
-Test
- ↓
-Flow
- ↓
-Page
- ↓
-Locators
- ↓
-Playwright
-```
-
-Essa organização reduz duplicação e mantém mudanças de interface isoladas das regras do cenário.
+| Recurso | Descrição |
+|---|---|
+| [Código-fonte](./src) | Implementação dos componentes e testes |
+| [Workflows](./.github/workflows) | Configurações de automação no GitHub |
+| [README técnico](#) | Detalhamento técnico apresentado abaixo |
 
 ---
 
-# SOAP / HTTP
+## 👩‍💻 Sobre a desenvolvedora
 
-A camada de integração foi preparada para trabalhar com serviços SOAP através do Apache HttpClient.
+**Vanessa Santos | Quality Assurance**
 
-As responsabilidades são separadas entre:
+Estudante de **Análise e Desenvolvimento de Sistemas**, com previsão de conclusão em 2028.
 
-```text
-Request
-   ↓
-Builder
-   ↓
-Client
-   ↓
-Response
-   ↓
-Parser
-   ↓
-Domain
-```
+Experiência prática em testes manuais, automação Web, testes de API e validação de dados com SQL.
 
-Isso evita manipulação extensa de XML diretamente dentro dos testes.
+Interesse em Quality Engineering, boas práticas de testes, automação e melhoria contínua.
 
----
+🎯 **Objetivo profissional:** QA Júnior ou Estágio em Quality Assurance.
 
-# Database Validation
+<div align="center">
 
-O SQL Server é tratado como uma camada própria da arquitetura.
+### 🤝 Vamos nos conectar?
 
-```text
-Test / Validator
-       ↓
-Repository
-       ↓
-Database Client
-       ↓
-SQL Server
-```
+[LinkedIn](https://www.linkedin.com/in/vanessasantos-qa/) • [GitHub](https://github.com/VanessaSantosQA)
 
-O Repository Pattern mantém queries centralizadas e permite evolução das consultas sem contaminar os cenários de teste.
+**Quality is built, tested and continuously improved.**
+
+</div>
 
 ---
 
-# Configuração por Ambiente
+## 📚 Documentação técnica detalhada
 
-O framework possui configuração desacoplada da máquina onde é executado.
-
-Exemplo:
-
-```properties
-environment=hml
-
-base.url.hml=classpath:quitacao.html
-
-browser=chrome
-headless=false
-
-viewport.width=1920
-viewport.height=1080
-```
-
-Recursos locais podem ser resolvidos pelo classpath:
-
-```text
-classpath:quitacao.html
-```
-
-Evitando caminhos absolutos como:
-
-```text
-C:\Users\usuario\projeto\...
-```
-
-Isso melhora a portabilidade entre máquinas e ambientes de execução.
-
----
-
-# Segurança de Configuração
-
-Credenciais e configurações locais não são versionadas.
-
-O repositório utiliza arquivos de exemplo:
-
-```text
-application.properties.example
-users.properties.example
-```
-
-Cada desenvolvedor cria sua configuração local a partir desses modelos.
-
-Arquivos contendo informações locais são protegidos pelo `.gitignore`.
-
-Essa estratégia reduz o risco de exposição acidental de credenciais no histórico do Git.
-
----
-
-# Fail Fast Configuration
-
-Configurações obrigatórias são validadas antes da execução do cenário.
-
-Em vez de permitir que uma propriedade inexistente provoque erros posteriores e pouco claros, o framework interrompe a execução na origem do problema.
-
-Exemplo:
-
-```text
-Configuração obrigatória não encontrada: environment
-```
-
-Isso reduz o tempo de diagnóstico e torna falhas de infraestrutura mais previsíveis.
-
----
-
-# Testabilidade da Infraestrutura
-
-A configuração do framework também possui testes próprios.
-
-Exemplo:
-
-```text
-EnvironmentConfigTest
-```
-
-Isso permite validar aspectos como:
-
-```text
-Ambiente
-   ↓
-Configuração
-   ↓
-Resolução da URL
-   ↓
-Execução
-```
-
-antes que um erro de configuração chegue à camada Web.
-
----
-
-# Stack
-
-| Área                  | Tecnologia          |
-| --------------------- | ------------------- |
-| Linguagem             | Java 21             |
-| Web Automation        | Playwright          |
-| Test Framework        | JUnit 5             |
-| Assertions            | AssertJ             |
-| Build                 | Maven               |
-| Database              | SQL Server / JDBC   |
-| HTTP / SOAP           | Apache HttpClient 5 |
-| JSON                  | Jackson             |
-| Reports               | Allure              |
-| Excel                 | Apache POI          |
-| Boilerplate Reduction | Lombok              |
-| Test Data             | Datafaker           |
-| Versionamento         | Git / GitHub        |
-
-O `pom.xml` centraliza as versões das principais dependências para facilitar a manutenção e atualização do framework.
-
----
-
-# Estrutura Conceitual
-
-```text
-src
-├── main
-│   ├── java
-│   │   └── com.automation
-│   │       ├── config
-│   │       ├── domain
-│   │       ├── flow
-│   │       ├── locators
-│   │       ├── pages
-│   │       ├── repository
-│   │       ├── service
-│   │       └── utils
-│   │
-│   └── resources
-│       ├── requests
-│       ├── application.properties.example
-│       └── users.properties.example
-│
-└── test
-    └── java
-        └── com.automation
-            └── tests
-```
-
-A estrutura evolui de acordo com as necessidades do domínio, preservando a separação entre infraestrutura, domínio e cenários.
-
----
-
-# Decisões Arquiteturais
-
-Decisões importantes do projeto são registradas através de **Architecture Decision Records (ADR)**.
-
-Entre elas:
-
-```text
-ADR-001
-Financial Domain-Oriented Platform
-
-ADR-002
-Financial Snapshot Strategy
-```
-
-O objetivo dos ADRs é registrar não apenas **o que foi implementado**, mas principalmente **por que determinada abordagem foi escolhida**.
-
-Isso facilita manutenção, revisão técnica e evolução futura da plataforma.
-
----
-
-# Qualidade do Código
-
-Alguns princípios aplicados ao desenvolvimento:
-
-* separação de responsabilidades;
-* baixo acoplamento;
-* alta coesão;
-* composição sobre duplicação;
-* regras de negócio independentes da infraestrutura;
-* configuração externa ao código;
-* reutilização controlada;
-* legibilidade dos cenários;
-* fail-fast para configurações inválidas;
-* testes da própria infraestrutura de automação.
-
-A prioridade é manter uma base que possa crescer sem transformar a suíte em um conjunto de scripts difíceis de manter.
-
----
-
-# Execução
-
-### Pré-requisitos
-
-```text
-Java 21
-Maven 3.9+
-Git
-```
-
-Clone o repositório:
-
-```bash
-git clone https://github.com/VanessaSantosQA/automacao-quitacao.git
-cd automacao-quitacao
-```
-
-Crie os arquivos locais de configuração a partir dos exemplos.
-
-### PowerShell
-
-```powershell
-Copy-Item "src/main/resources/application.properties.example" "src/main/resources/application.properties"
-
-Copy-Item "src/main/resources/users.properties.example" "src/main/resources/users.properties"
-```
-
-Execute a suíte:
-
-```bash
-mvn clean test
-```
-
-Para executar um teste específico:
-
-```bash
-mvn "-Dtest=NomeDoTeste" test
-```
-
----
-
-# Evidências e Relatórios
-
-Os resultados do Allure são direcionados para:
-
-```text
-target/allure-results
-```
-
-A estrutura permite evolução da estratégia de evidências para cenários Web, integração e validações financeiras.
-
----
-
-# Evolução da Plataforma
-
-A arquitetura foi criada para permitir evolução incremental.
-
-Entre os próximos passos estão:
-
-```text
-CI/CD
-   ↓
-GitHub Actions
-   ↓
-Execução automatizada
-   ↓
-Relatórios
-   ↓
-Evidências
-   ↓
-Regressão financeira
-```
-
-Também fazem parte da evolução planejada:
-
-* ampliação da cobertura de APIs REST;
-* execução parametrizada por ambiente;
-* expansão da estratégia de massa;
-* evolução dos relatórios;
-* integração contínua;
-* execução automatizada de regressões.
-
----
-
-# O que este projeto demonstra
-
-Mais do que conhecimento de uma ferramenta de automação, este projeto demonstra uma abordagem de **Quality Engineering** baseada em:
-
-**entender o domínio → modelar o problema → separar responsabilidades → automatizar → observar o estado → validar o comportamento.**
-
-A ferramenta é parte da solução.
-
-A estratégia de qualidade é o que orienta a arquitetura.
-
----
-
-# Sobre mim
-
-Sou **Vanessa Santos**, profissional em desenvolvimento na área de Quality Engineering, com foco em automação de testes e construção de frameworks.
-
-Tenho direcionado meus estudos e projetos para automação Web, integração de serviços, validações em banco de dados e arquitetura de testes utilizando Java.
-
-Este projeto representa minha evolução prática na construção de uma solução de automação estruturada, com preocupação não apenas em fazer o teste executar, mas em criar uma base sustentável para sua evolução.
-
----
-
-# Contato
-
-**LinkedIn:**
-https://www.linkedin.com/in/vanessasantos-qa/
-
-**GitHub:**
-https://github.com/VanessaSantosQA
-
----
-
-> **Qualidade não termina quando o teste passa. Ela começa quando conseguimos confiar no comportamento que estamos validando.**
-
-**Vanessa Santos — QA Automation | Quality Engineering**
+<!-- Mantenha abaixo desta linha o restante da documentação original do projeto. -->
